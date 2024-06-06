@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KdGui", "KdGui\KdGui.csproj", "{3EF32655-B31C-474F-A1A0-2C321991A4EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{6C5ABC3D-FE30-49F6-A993-284CDA9B6065}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+		renovate.json = renovate.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{A541397F-88A8-403D-8203-68CCE8A16386}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\add-new-item-to-project.yml = .github\workflows\add-new-item-to-project.yml
+		.github\workflows\build-misc-projects-status-check.yml = .github\workflows\build-misc-projects-status-check.yml
+		.github\workflows\build-status-check.yml = .github\workflows\build-status-check.yml
+		.github\workflows\prepare-release.yml = .github\workflows\prepare-release.yml
+		.github\workflows\release.yml = .github\workflows\release.yml
+		.github\workflows\sdk-status-check.yml = .github\workflows\sdk-status-check.yml
+		.github\workflows\sonar-scan-pr-status-check.yml = .github\workflows\sonar-scan-pr-status-check.yml
+		.github\workflows\sync-bot.yml = .github\workflows\sync-bot.yml
+		.github\workflows\sync-pr-to-issue.yml = .github\workflows\sync-pr-to-issue.yml
+		.github\workflows\sync-status-check.yml = .github\workflows\sync-status-check.yml
+		.github\workflows\triage-issue.yml = .github\workflows\triage-issue.yml
+		.github\workflows\unit-test-status-check.yml = .github\workflows\unit-test-status-check.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{CFBEDB7D-D380-4264-BD98-389A7B44BD92}"
+	ProjectSection(SolutionItems) = preProject
+		Testing\.editorconfig = Testing\.editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KdGuiTests", "Testing\KdGuiTests\KdGuiTests.csproj", "{1CFD00BC-2CEB-441F-BF38-F68124ACDF55}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3EF32655-B31C-474F-A1A0-2C321991A4EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EF32655-B31C-474F-A1A0-2C321991A4EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EF32655-B31C-474F-A1A0-2C321991A4EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EF32655-B31C-474F-A1A0-2C321991A4EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CFD00BC-2CEB-441F-BF38-F68124ACDF55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CFD00BC-2CEB-441F-BF38-F68124ACDF55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CFD00BC-2CEB-441F-BF38-F68124ACDF55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CFD00BC-2CEB-441F-BF38-F68124ACDF55}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A541397F-88A8-403D-8203-68CCE8A16386} = {6C5ABC3D-FE30-49F6-A993-284CDA9B6065}
+		{1CFD00BC-2CEB-441F-BF38-F68124ACDF55} = {CFBEDB7D-D380-4264-BD98-389A7B44BD92}
+	EndGlobalSection
+EndGlobal
