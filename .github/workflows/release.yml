@@ -15,11 +15,6 @@ on:
         required: true
         type: choice
         options: [Preview, Production]
-      trigger-api-docs-release:
-        description: Check to trigger a release of the API Documentation website.
-        required: false
-        default: true
-        type: boolean
       dry-run:
         description: Dry Run - Check to run the workflow without creating a release.
         required: false

@@ -79,7 +79,8 @@ internal sealed class ComboBox : Control, IComboBox
             return;
         }
 
-        var previewValue = Items[this.selectedItemIndex];
+        var indexOutOfRange = this.selectedItemIndex < 0 || this.selectedItemIndex >= Items.Count;
+        var previewValue = indexOutOfRange ? string.Empty : Items[this.selectedItemIndex];
 
         var currentPos = ImGuiInvoker.GetCursorPos();
 
