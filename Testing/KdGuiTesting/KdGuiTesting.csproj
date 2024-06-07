@@ -24,4 +24,8 @@
       <AdditionalFiles Include="stylecop.json" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\KdGui\KdGui.csproj" />
+    </ItemGroup>
+
 </Project>
