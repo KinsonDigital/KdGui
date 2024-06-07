@@ -6,7 +6,6 @@ namespace KdGui;
 
 using Core;
 using System;
-using System.Drawing;
 using Carbonate.NonDirectional;
 using ImGuiNET;
 
@@ -53,8 +52,6 @@ internal sealed class ArrowButton : Control, IArrowButton
         }
 
         ImGuiInvoker.PushID(this.id);
-
-        ImGuiInvoker.PushStyleColor(ImGuiCol.Button, Color.IndianRed);
 
         ImGuiInvoker.ArrowButton(this.id, ImGuiDir.Down);
 
