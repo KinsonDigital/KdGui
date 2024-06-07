@@ -6,15 +6,54 @@
         <Nullable>enable</Nullable>
         <AssemblyName>KdGui</AssemblyName>
         <RootNamespace>KdGui</RootNamespace>
+
+        <!--Update this for production and preview releases-->
+        <Version>1.0.0-preview.1</Version>
+
+        <!--Update this for production and preview releases-->
+        <FileVersion>1.0.0-preview.1</FileVersion>
+
+        <!--
+          DO NOT UPDATE THIS FOR PREVIEW RELEASES!!
+          Visual Studio does not allow the preview syntax for this tag
+          Example: v1.2.3.preview.1 is not allowed
+        -->
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <ApplicationIcon>kdgui-logo.ico</ApplicationIcon>
+        <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <PackageId>KinsonDigital.KdGui</PackageId>
+        <Authors>Calvin Wilkinson</Authors>
+        <Company>Kinson Digital</Company>
+        <Product>KdGui</Product>
+        <Description>UI library driven by IMGUI to make it easier to quickly create UI controls.</Description>
+        <Copyright>Copyright ©2024 Kinson Digital</Copyright>
+        <PackageTags>imgui game games ui</PackageTags>
+        <Configurations>Debug;Release</Configurations>
+        <PackageProjectUrl>https://github.com/KinsonDigital/KdGui</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/KinsonDigital/KdGui</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageIcon>kdgui-logo.png</PackageIcon>
+        <Platforms>x64</Platforms>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="ImGui.NET" Version="1.90.7.1" />
+        <None Include="kdgui-logo.ico" Pack="true" PackagePath="\" />
+        <None Include="..\Images\kdgui-logo.png" Pack="true" PackagePath="\" />
+        <None Include="..\LICENSE.md" Pack="true" PackagePath="\" />
+        <None Include="..\README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+    <ItemGroup>
       <PackageReference Include="KinsonDigital.Carbonate" Version="1.0.0-preview.18" />
       <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+      <PackageReference Include="Silk.NET.OpenGL.Extensions.ImGui" Version="2.21.0" />
+      <PackageReference Include="SimpleInjector" Version="5.4.6" />
       <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

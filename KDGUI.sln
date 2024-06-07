@@ -34,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{CFBE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KdGuiTests", "Testing\KdGuiTests\KdGuiTests.csproj", "{1CFD00BC-2CEB-441F-BF38-F68124ACDF55}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KdGuiTesting", "Testing\KdGuiTesting\KdGuiTesting.csproj", "{BA780644-0A1E-4FC3-86C7-FDC4A301C49C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,9 +50,14 @@ Global
 		{1CFD00BC-2CEB-441F-BF38-F68124ACDF55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CFD00BC-2CEB-441F-BF38-F68124ACDF55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CFD00BC-2CEB-441F-BF38-F68124ACDF55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA780644-0A1E-4FC3-86C7-FDC4A301C49C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA780644-0A1E-4FC3-86C7-FDC4A301C49C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA780644-0A1E-4FC3-86C7-FDC4A301C49C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA780644-0A1E-4FC3-86C7-FDC4A301C49C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A541397F-88A8-403D-8203-68CCE8A16386} = {6C5ABC3D-FE30-49F6-A993-284CDA9B6065}
 		{1CFD00BC-2CEB-441F-BF38-F68124ACDF55} = {CFBEDB7D-D380-4264-BD98-389A7B44BD92}
+		{BA780644-0A1E-4FC3-86C7-FDC4A301C49C} = {CFBEDB7D-D380-4264-BD98-389A7B44BD92}
 	EndGlobalSection
 EndGlobal
