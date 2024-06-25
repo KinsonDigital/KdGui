@@ -36,6 +36,7 @@ public class Main : Window
 
         this.ctrlGroup = this.ctrlFactory.CreateControlGroup();
         this.ctrlGroup.Add(this.nextPrevious);
+        this.ctrlGroup.NoResize = true;
         this.ctrlGroup.TitleBarVisible = false;
         this.ctrlGroup.AutoSizeToFitContent = true;
         this.ctrlGroup.Initialized += (_, _) =>
