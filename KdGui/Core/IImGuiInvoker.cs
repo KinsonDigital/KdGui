@@ -1,9 +1,10 @@
-﻿// <copyright file="IImGuiInvoker.cs" company="KinsonDigital">
+// <copyright file="IImGuiInvoker.cs" company="KinsonDigital">
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
 namespace Core;
 
+using System.Drawing;
 using System.Numerics;
 using ImGuiNET;
 
@@ -199,6 +200,20 @@ public interface IImGuiInvoker
     /// <param name="idx">The type of area of the style to push the color.</param>
     /// <param name="col">The color to push.</param>
     void PushStyleColor(ImGuiCol idx, Vector4 col);
+
+    /// <summary>
+    /// Pushes the color using the given <paramref name="col"/> to the current style described by the given <paramref name="idx"/>.
+    /// </summary>
+    /// <param name="idx">The type of area of the style to push the color.</param>
+    /// <param name="col">The color to push.</param>
+    void PushStyleColor(ImGuiCol idx, uint col);
+
+    /// <summary>
+    /// Pushes the color using the given <paramref name="clr"/> to the current style described by the given <paramref name="idx"/>.
+    /// </summary>
+    /// <param name="idx">The type of area of the style to push the color.</param>
+    /// <param name="clr">The color to push.</param>
+    void PushStyleColor(ImGuiCol idx, Color clr);
 
     /// <summary>
     /// Pops the most recent style color.
