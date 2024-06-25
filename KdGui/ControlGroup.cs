@@ -43,6 +43,9 @@ internal sealed class ControlGroup : IControlGroup
     /// <param name="renderReactable">Manages render notifications.</param>
     public ControlGroup(IImGuiInvoker imGuiInvoker, IPushReactable renderReactable)
     {
+        ArgumentNullException.ThrowIfNull(imGuiInvoker);
+        ArgumentNullException.ThrowIfNull(renderReactable);
+
         this.imGuiInvoker = imGuiInvoker;
         Id = Guid.NewGuid();
         this.pushId = Id.ToString();
