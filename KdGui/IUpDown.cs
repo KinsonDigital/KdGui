@@ -11,6 +11,9 @@ using System;
 /// </summary>
 public interface IUpDown : IControl
 {
+    /// <summary>
+    /// Invoked when the value changes.
+    /// </summary>
     event EventHandler<float>? ValueChanged;
 
     /// <summary>

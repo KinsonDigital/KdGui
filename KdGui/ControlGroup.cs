@@ -7,12 +7,14 @@ namespace KdGui;
 using Core;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Numerics;
 using Carbonate.NonDirectional;
 using ImGuiNET;
 
 /// <inheritdoc/>
+[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global", Justification = "Instantiated via IoC container.")]
 internal sealed class ControlGroup : IControlGroup
 {
     private const int PreRenderCount = 5;
@@ -56,6 +58,7 @@ internal sealed class ControlGroup : IControlGroup
     /// <inheritdoc/>
     public string Title { get; set; } = "ControlGroup";
 
+    /// <inheritdoc/>
     public Guid Id { get; }
 
     /// <inheritdoc/>

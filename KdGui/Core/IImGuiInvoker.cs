@@ -1,8 +1,9 @@
-// <copyright file="IImGuiInvoker.cs" company="KinsonDigital">
+﻿// <copyright file="IImGuiInvoker.cs" company="KinsonDigital">
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-namespace Core;
+#pragma warning disable SA1515
+namespace KdGui.Core;
 
 using System.Drawing;
 using System.Numerics;
@@ -47,7 +48,7 @@ public interface IImGuiInvoker
     ///             Numerical Formatting
     ///             <para/>
     ///             You can control how numeric values are displayed, including the number of decimal places,
-    ///             whether to use scientific notation, whether to include a thousands separator, and more.
+    ///             whether to use scientific notation, whether to include the thousands separator, and more.
     ///             For example, {0:F2} formats the number with two decimal places.
     ///             <para/>
     ///         </item>

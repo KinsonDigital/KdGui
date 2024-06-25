@@ -3,12 +3,13 @@
 // </copyright>
 
 #pragma warning disable SA1515
-namespace Core;
+namespace KdGui.Core;
 
 using System.Drawing;
 using System.Numerics;
 using ImGuiNET;
 
+/// <inheritdoc/>
 internal sealed class ImGuiInvoker : IImGuiInvoker
 {
      /// <inheritdoc/>

@@ -6,10 +6,12 @@ namespace KdGui;
 
 using Core;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Carbonate.NonDirectional;
 using ImGuiNET;
 
 /// <inheritdoc cref="IRadioButton"/>
+[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global", Justification = "Instantiated via IoC container.")]
 internal class RadioButton : Control, IRadioButton
 {
     /// <summary>

@@ -6,11 +6,13 @@ namespace KdGui;
 
 using Core;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using Carbonate.NonDirectional;
 using ImGuiNET;
 
 /// <inheritdoc cref="ICheckBox"/>
+[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global", Justification = "Instantiated via IoC container.")]
 internal sealed class CheckBox : Control, ICheckBox
 {
     private readonly string id = Guid.NewGuid().ToString();

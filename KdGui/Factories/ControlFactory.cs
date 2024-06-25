@@ -14,26 +14,26 @@ public class ControlFactory : IControlFactory
     public IButton CreateButton() => IoC.Container.GetInstance<IButton>();
 
     /// <inheritdoc/>
-    public ILabel? CreateLabel() => IoC.Container.GetInstance<ILabel>();
+    public ILabel CreateLabel() => IoC.Container.GetInstance<ILabel>();
 
     /// <inheritdoc/>
-    public IArrowButton? CreateArrowButton() => IoC.Container.GetInstance<IArrowButton>();
+    public IArrowButton CreateArrowButton() => IoC.Container.GetInstance<IArrowButton>();
 
     /// <inheritdoc/>
-    public ICheckBox? CreateCheckbox() => IoC.Container.GetInstance<ICheckBox>();
+    public ICheckBox CreateCheckbox() => IoC.Container.GetInstance<ICheckBox>();
 
     /// <inheritdoc/>
-    public IRadioButton? CreateRadioButton() => IoC.Container.GetInstance<IRadioButton>();
+    public IRadioButton CreateRadioButton() => IoC.Container.GetInstance<IRadioButton>();
 
     /// <inheritdoc/>
-    public ISlider? CreateSlider() => IoC.Container.GetInstance<ISlider>();
+    public ISlider CreateSlider() => IoC.Container.GetInstance<ISlider>();
 
     /// <inheritdoc/>
-    public IUpDown? CreateUpDown() => IoC.Container.GetInstance<IUpDown>();
+    public IUpDown CreateUpDown() => IoC.Container.GetInstance<IUpDown>();
 
     /// <inheritdoc/>
-    public IComboBox? CreateComboBox() => IoC.Container.GetInstance<IComboBox>();
+    public IComboBox CreateComboBox() => IoC.Container.GetInstance<IComboBox>();
 
     /// <inheritdoc/>
-    public INextPrevious? CreateNextPrevious() => IoC.Container.GetInstance<INextPrevious>();
+    public INextPrevious CreateNextPrevious() => IoC.Container.GetInstance<INextPrevious>();
 }
