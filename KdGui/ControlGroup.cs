@@ -170,8 +170,9 @@ internal sealed class ControlGroup : IControlGroup
 
         this.imGuiInvoker.PushID(this.pushId);
 
-        this.imGuiInvoker.Begin(Title, flags);
         PushWindowStyles();
+        this.imGuiInvoker.Begin(Title, flags);
+
 
         // Update the position of the window as long as it's not the first render
         // and the window is not being dragged
