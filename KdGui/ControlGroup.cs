@@ -132,6 +132,9 @@ internal sealed class ControlGroup : IControlGroup
     }
 
     /// <inheritdoc/>
+    public bool NoResize { get; set; }
+
+    /// <inheritdoc/>
     public bool Visible
     {
         get => this.visible;
@@ -254,6 +257,11 @@ internal sealed class ControlGroup : IControlGroup
         flags = AutoSizeToFitContent ? flags | ImGuiWindowFlags.AlwaysAutoResize : flags;
         flags = this.titleBarVisible ? flags : flags | ImGuiWindowFlags.NoMove;
 
+        if (NoResize)
+        {
+            flags |= ImGuiWindowFlags.NoResize;
+        }
+
         if (Visible)
         {
             return flags;
@@ -273,6 +281,13 @@ internal sealed class ControlGroup : IControlGroup
         var styleAlpha = Visible ? 1f : 0f;
         this.imGuiInvoker.PushStyleVar(ImGuiStyleVar.Alpha, styleAlpha);
         this.imGuiInvoker.PushStyleColor(ImGuiCol.Text, Color.White);
+
+        if (NoResize)
+        {
+            this.imGuiInvoker.PushStyleColor(ImGuiCol.ResizeGrip, Color.Transparent);
+            this.imGuiInvoker.PushStyleColor(ImGuiCol.ResizeGripHovered, Color.Transparent);
+            this.imGuiInvoker.PushStyleColor(ImGuiCol.ResizeGripActive, Color.Transparent);
+        }
     }
 
     /// <summary>
@@ -280,7 +295,7 @@ internal sealed class ControlGroup : IControlGroup
     /// </summary>
     private void PopWindowStyles()
     {
-        this.imGuiInvoker.PopStyleColor(1);
+        this.imGuiInvoker.PopStyleColor(NoResize ? 4 : 1);
         this.imGuiInvoker.PopStyleVar(1);
     }
 

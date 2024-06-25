@@ -89,6 +89,11 @@ public interface IControlGroup : IDisposable
     bool AutoSizeToFitContent { get; set; }
 
     /// <summary>
+    /// Gets or sets a value indicating whether the control group can be resized.
+    /// </summary>
+    bool NoResize { get; set; }
+
+    /// <summary>
     /// Gets or sets a value indicating whether the control group is visible.
     /// </summary>
     bool Visible { get; set; }
