@@ -16,6 +16,7 @@ using ImGuiNET;
 internal sealed class ControlGroup : IControlGroup
 {
     private const int PreRenderCount = 5;
+    private const float CollapseButtonWidth = 28f;
     private readonly List<IControl> controls = new ();
     private readonly IImGuiInvoker imGuiInvoker;
     private readonly IPushReactable renderReactable;
@@ -173,6 +174,12 @@ internal sealed class ControlGroup : IControlGroup
         PushWindowStyles();
         this.imGuiInvoker.Begin(Title, flags);
 
+        if (AutoSizeToFitContent && TitleBarVisible)
+        {
+            var titleWidth = this.imGuiInvoker.CalcTextSize(Title).X + CollapseButtonWidth;
+
+            this.imGuiInvoker.InvisibleButton($"##title_width {Title}", new Vector2(titleWidth, 0));
+        }
 
         // Update the position of the window as long as it's not the first render
         // and the window is not being dragged
@@ -244,7 +251,7 @@ internal sealed class ControlGroup : IControlGroup
         var flags = ImGuiWindowFlags.None;
 
         flags = this.titleBarVisible ? flags : flags | ImGuiWindowFlags.NoTitleBar;
-        flags = AutoSizeToFitContent ? flags | ImGuiWindowFlags.NoResize : flags;
+        flags = AutoSizeToFitContent ? flags | ImGuiWindowFlags.AlwaysAutoResize : flags;
         flags = this.titleBarVisible ? flags : flags | ImGuiWindowFlags.NoMove;
 
         if (Visible)
