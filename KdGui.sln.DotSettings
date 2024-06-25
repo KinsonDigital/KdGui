@@ -1,4 +1,69 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=12B46BFFE36BE54D9A9DEC0B07E0283E/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=12B46BFFE36BE54D9A9DEC0B07E0283E/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=12B46BFFE36BE54D9A9DEC0B07E0283E/Description/@EntryValue">Template for creating an object creation method for unit testing</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=12B46BFFE36BE54D9A9DEC0B07E0283E/Field/=OBJECT_005FTYPE/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=12B46BFFE36BE54D9A9DEC0B07E0283E/Field/=OBJECT_005FTYPE/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=12B46BFFE36BE54D9A9DEC0B07E0283E/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=12B46BFFE36BE54D9A9DEC0B07E0283E/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=12B46BFFE36BE54D9A9DEC0B07E0283E/Scope/=C3001E7C0DA78E4487072B7E050D86C5/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=12B46BFFE36BE54D9A9DEC0B07E0283E/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=12B46BFFE36BE54D9A9DEC0B07E0283E/Shortcut/@EntryValue">xu-create-test-obj-method</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=12B46BFFE36BE54D9A9DEC0B07E0283E/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=12B46BFFE36BE54D9A9DEC0B07E0283E/Text/@EntryValue">/// &lt;summary&gt;
+/// Creates a new instance of &lt;see cref="$OBJECT_TYPE$"/&gt; for the purpose of testing.
+/// &lt;/summary&gt;
+/// &lt;returns&gt;The instance to test.&lt;/returns&gt;
+private $OBJECT_TYPE$ CreateSystemUnderTest()
+    =&gt; new ($END$);</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A35139C154F1D44D82E78CC953FD26AE/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A35139C154F1D44D82E78CC953FD26AE/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A35139C154F1D44D82E78CC953FD26AE/Description/@EntryValue">XUnit test method for testing null constructor parameters</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A35139C154F1D44D82E78CC953FD26AE/Field/=PARAM_005F1/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A35139C154F1D44D82E78CC953FD26AE/Field/=PARAM_005F1/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A35139C154F1D44D82E78CC953FD26AE/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A35139C154F1D44D82E78CC953FD26AE/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A35139C154F1D44D82E78CC953FD26AE/Scope/=C3001E7C0DA78E4487072B7E050D86C5/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A35139C154F1D44D82E78CC953FD26AE/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A35139C154F1D44D82E78CC953FD26AE/Shortcut/@EntryValue">xu-null-ctor-param</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A35139C154F1D44D82E78CC953FD26AE/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=A35139C154F1D44D82E78CC953FD26AE/Text/@EntryValue">[Fact]
+public void Ctor_WithNull$PARAM_1$Param_ThrowsException()
+{
+    // Arrange &amp; Act
+    var act = () =&gt;
+    {
+    };
+
+    // Assert
+    act.Should()
+        .Throw&lt;ArgumentNullException&gt;()
+        .WithMessage("Value cannot be null. (Parameter '$END$$PARAM_1$')");
+}</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F9A49C547F991144BC78CB6B984E54D5/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F9A49C547F991144BC78CB6B984E54D5/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F9A49C547F991144BC78CB6B984E54D5/Description/@EntryValue">XUnit Unit Test Method</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F9A49C547F991144BC78CB6B984E54D5/Field/=EXPECTED_005FRESULT/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F9A49C547F991144BC78CB6B984E54D5/Field/=EXPECTED_005FRESULT/Order/@EntryValue">2</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F9A49C547F991144BC78CB6B984E54D5/Field/=MEMBER_005FUNDER_005FTEST/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F9A49C547F991144BC78CB6B984E54D5/Field/=MEMBER_005FUNDER_005FTEST/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F9A49C547F991144BC78CB6B984E54D5/Field/=SCENARIO_005FUNDER_005FTEST/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F9A49C547F991144BC78CB6B984E54D5/Field/=SCENARIO_005FUNDER_005FTEST/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F9A49C547F991144BC78CB6B984E54D5/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F9A49C547F991144BC78CB6B984E54D5/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F9A49C547F991144BC78CB6B984E54D5/Scope/=C3001E7C0DA78E4487072B7E050D86C5/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F9A49C547F991144BC78CB6B984E54D5/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F9A49C547F991144BC78CB6B984E54D5/Shortcut/@EntryValue">xu-test-method</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F9A49C547F991144BC78CB6B984E54D5/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=F9A49C547F991144BC78CB6B984E54D5/Text/@EntryValue">[Fact]
+public void $MEMBER_UNDER_TEST$_$SCENARIO_UNDER_TEST$_$EXPECTED_RESULT$()
+{
+    // Arrange
+
+    // Act
+
+    // Assert
+}</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=csharpsquid/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=kinson/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=reactable/@EntryIndexedValue">True</s:Boolean>
