@@ -1,7 +1,8 @@
-// <copyright file="ImGuiInvoker.cs" company="KinsonDigital">
+﻿// <copyright file="ImGuiInvoker.cs" company="KinsonDigital">
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
+#pragma warning disable SA1515
 namespace Core;
 
 using System.Drawing;
@@ -36,6 +37,11 @@ internal sealed class ImGuiInvoker : IImGuiInvoker
 
     /// <inheritdoc/>
     public bool Checkbox(string label, ref bool v) => ImGui.Checkbox(label, ref v);
+
+    /// <inheritdoc/>
+    // ReSharper disable InconsistentNaming
+    public bool InvisibleButton(string str_id, Vector2 size) => ImGui.InvisibleButton(str_id, size);
+    // ReSharper restore InconsistentNaming
 
     /// <inheritdoc/>
     // ReSharper disable once InconsistentNaming

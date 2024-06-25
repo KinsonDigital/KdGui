@@ -115,6 +115,14 @@ public interface IImGuiInvoker
     bool Checkbox(string label, ref bool v);
 
     /// <summary>
+    /// Creates an invisible button.
+    /// </summary>
+    /// <param name="str_id">The id of the button.</param>
+    /// <param name="size">The size of the button.</param>
+    /// <returns>True if the button has been clicked.</returns>
+    bool InvisibleButton(string str_id, Vector2 size);
+
+    /// <summary>
     /// Creates a combo box control.
     /// </summary>
     /// <param name="label">The label of the combo box.</param>
