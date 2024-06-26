@@ -4,6 +4,7 @@
 
 namespace KdGuiTests.Helpers;
 
+using System.Collections;
 using System.Reflection;
 using FluentAssertions;
 
@@ -34,5 +35,34 @@ public static class TestHelpers
         foundField.FieldType.Should().Be(typeof(T), "the generic type should match the actual field type.");
 
         foundField.SetValue(fieldContainer, value);
+    }
+
+    /// <summary>
+    /// Sets a field of type <see cref="List{T}"/> with a name that matches the given <paramref name="fieldName"/> to the value of null.
+    /// </summary>
+    /// <param name="fieldContainer">The object that contains the field.</param>
+    /// <param name="fieldName">The name of the field.</param>
+    /// <typeparam name="TElements">The type of the field array's elements.</typeparam>
+    /// <returns>The <see cref="List{T}"/> of items.</returns>
+    public static TElements GetListField<TElements>(this object fieldContainer, string fieldName)
+        where TElements : class
+    {
+        fieldContainer.Should().NotBeNull("setting the enum field value of a null object is not possible.");
+        fieldName.Should().NotBeNullOrEmpty("setting an enum field value requires a non-empty or null field name.");
+
+        var allFields = fieldContainer.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+
+        allFields.Should().HaveCountGreaterThan(0, $"no enum fields exist in the object.");
+
+        var foundField = Array.Find(allFields, f => f.Name == fieldName);
+
+        foundField.Should().NotBeNull($"a field with the name '{fieldName}' does not exist in the object.");
+
+        var isCorrectType = foundField.FieldType.IsGenericType &&
+                            foundField.FieldType.GetGenericTypeDefinition() == typeof(List<>);
+
+        isCorrectType.Should().BeTrue("the field must be of type 'List<T>'.");
+
+        return (TElements)foundField.GetValue(fieldContainer) !;
     }
 }
