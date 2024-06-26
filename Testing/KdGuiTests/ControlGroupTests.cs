@@ -270,7 +270,7 @@ public class ControlGroupTests
 
     #region Method Tests
     [Fact]
-    public void AddAndGetControl_WhenAddingControl_AddsControl()
+    public void Add_WhenAddingControl_AddsControl()
     {
         // Arrange
         var fakeBtn = new FakeButton();
@@ -295,6 +295,22 @@ public class ControlGroupTests
         actualFakeLabel.Should().NotBeNull();
         actualFakeLabel.Should().BeOfType<FakeLabel>();
         actualFakeLabel.Name.Should().Be("fake-label");
+    }
+
+    [Fact]
+    public void GetControl_WithControlIsNotFound_ReturnsDefault()
+    {
+        // Arrange
+        var fakeBtn = Substitute.For<IControl>();
+
+        var sut = CreateSystemUnderTest();
+        sut.Add(fakeBtn);
+
+        // Act
+        var actual = sut.GetControl<IControl>("fake-button");
+
+        // Assert
+        actual.Should().BeNull();
     }
 
     [Theory]
@@ -519,7 +535,7 @@ public class ControlGroupTests
     }
 
     [Fact]
-    public void Render_WhenDraggingControlGroup_UpdatesPosition()
+    public void Render_WhenPositionIsSet_SetsImGuiWindowPosition()
     {
         // Arrange
         // Guarantee that the window is not being dragged
@@ -554,6 +570,23 @@ public class ControlGroupTests
     }
 
     [Fact]
+    public void Render_WhenDraggingControlGroup_UpdatesPosition()
+    {
+        // Arrange
+        var preRenderCount = 5;
+        this.mockImGuiInvoker.IsWindowFocused().Returns(true);
+        this.mockImGuiInvoker.IsMouseDragging(Arg.Any<ImGuiMouseButton>()).Returns(true);
+
+        var sut = CreateSystemUnderTest();
+
+        // Act
+        sut.Render();
+
+        // Assert
+        this.mockImGuiInvoker.Received(preRenderCount).GetWindowPos();
+    }
+
+    [Fact]
     public void Render_WithDefaultSettings_RendersGroup()
     {
         // Arrange
@@ -574,6 +607,28 @@ public class ControlGroupTests
         this.mockImGuiInvoker.Received(preRenderCount).IsWindowFocused();
         this.mockImGuiInvoker.Received(preRenderCount).IsMouseDragging(ImGuiMouseButton.Left);
         this.mockImGuiInvoker.Received(preRenderCount).End();
+    }
+
+    [Fact]
+    public void Dispose_WhenInvoked_DisposesOfGroup()
+    {
+        // Arrange
+        var mockCtrlA = Substitute.For<IControl>();
+        var mockCtrlB = Substitute.For<IControl>();
+
+        var sut = CreateSystemUnderTest();
+        sut.Add(mockCtrlA);
+        sut.Add(mockCtrlB);
+
+        // Act
+        sut.Dispose();
+        sut.Dispose();
+        var controls = sut.GetListField<List<IControl>>("controls");
+
+        // Assert
+        mockCtrlA.Received(1).Dispose();
+        mockCtrlB.Received(1).Dispose();
+        controls.Should().BeEmpty();
     }
     #endregion
 
