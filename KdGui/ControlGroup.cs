@@ -19,7 +19,7 @@ internal sealed class ControlGroup : IControlGroup
 {
     private const int PreRenderCount = 5;
     private const float CollapseButtonWidth = 28f;
-    private readonly List<IControl> controls = new ();
+    private readonly List<IControl> controls = [];
     private readonly IImGuiInvoker imGuiInvoker;
     private readonly IPushReactable renderReactable;
     private readonly string pushId;
@@ -190,8 +190,7 @@ internal sealed class ControlGroup : IControlGroup
             this.imGuiInvoker.InvisibleButton($"##title_width {Title}", new Vector2(titleWidth, 0));
         }
 
-        // Update the position of the window as long as it's not the first render
-        // and the window is not being dragged
+        // Update the position of the window as long as the window is not being dragged
         if (this.shouldSetPos && !this.isBeingDragged)
         {
             this.imGuiInvoker.SetWindowPos(this.position.ToVector2());
@@ -230,7 +229,7 @@ internal sealed class ControlGroup : IControlGroup
             this.position = this.imGuiInvoker.GetWindowPos().ToPoint();
         }
 
-        if (!this.isInitialized && this.invokeCount > PreRenderCount)
+        if (!this.isInitialized && this.invokeCount >= PreRenderCount)
         {
             this.Initialized?.Invoke(this, EventArgs.Empty);
             this.isInitialized = true;
@@ -240,6 +239,10 @@ internal sealed class ControlGroup : IControlGroup
 
         this.imGuiInvoker.End();
 
+        // NOTE: Then a KdGui control is rendered for the very first time, it is rendered 5 times.
+        // This is to ensure that certain ImGui functions and state is established.  Things such as
+        // size calculations and more are only done on the first render, so these numbers are not
+        // available or accurate until ta few renders are complete.
         if (this.invokeCount < PreRenderCount)
         {
             Render();
@@ -259,22 +262,10 @@ internal sealed class ControlGroup : IControlGroup
     {
         var flags = ImGuiWindowFlags.None;
 
-        flags = this.titleBarVisible ? flags : flags | ImGuiWindowFlags.NoTitleBar;
+        flags = this.titleBarVisible ? flags : flags | ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoMove;
         flags = AutoSizeToFitContent ? flags | ImGuiWindowFlags.AlwaysAutoResize : flags;
-        flags = this.titleBarVisible ? flags : flags | ImGuiWindowFlags.NoMove;
-
-        if (NoResize)
-        {
-            flags |= ImGuiWindowFlags.NoResize;
-        }
-
-        if (Visible)
-        {
-            return flags;
-        }
-
-        flags |= ImGuiWindowFlags.NoTitleBar;
-        flags |= ImGuiWindowFlags.NoBackground;
+        flags = NoResize ? flags | ImGuiWindowFlags.NoResize : flags;
+        flags = Visible ? flags : flags | ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoBackground;
 
         return flags;
     }
@@ -288,12 +279,14 @@ internal sealed class ControlGroup : IControlGroup
         this.imGuiInvoker.PushStyleVar(ImGuiStyleVar.Alpha, styleAlpha);
         this.imGuiInvoker.PushStyleColor(ImGuiCol.Text, Color.White);
 
-        if (NoResize)
+        if (!NoResize)
         {
-            this.imGuiInvoker.PushStyleColor(ImGuiCol.ResizeGrip, Color.Transparent);
-            this.imGuiInvoker.PushStyleColor(ImGuiCol.ResizeGripHovered, Color.Transparent);
-            this.imGuiInvoker.PushStyleColor(ImGuiCol.ResizeGripActive, Color.Transparent);
+            return;
         }
+
+        this.imGuiInvoker.PushStyleColor(ImGuiCol.ResizeGrip, Color.Transparent);
+        this.imGuiInvoker.PushStyleColor(ImGuiCol.ResizeGripHovered, Color.Transparent);
+        this.imGuiInvoker.PushStyleColor(ImGuiCol.ResizeGripActive, Color.Transparent);
     }
 
     /// <summary>
