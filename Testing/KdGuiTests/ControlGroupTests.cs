@@ -5,12 +5,16 @@
 namespace KdGuiTests;
 
 using System.Drawing;
+using System.Numerics;
 using Carbonate.NonDirectional;
+using Castle.Components.DictionaryAdapter;
 using FluentAssertions;
 using Helpers;
+using ImGuiNET;
 using KdGui;
 using KdGui.Core;
 using NSubstitute;
+using NSubstitute.ReceivedExtensions;
 
 /// <summary>
 /// Tests the <see cref="ControlGroup"/> class.
@@ -291,6 +295,285 @@ public class ControlGroupTests
         actualFakeLabel.Should().NotBeNull();
         actualFakeLabel.Should().BeOfType<FakeLabel>();
         actualFakeLabel.Name.Should().Be("fake-label");
+    }
+
+    [Theory]
+    // Title Bar Visible, No Auto Size
+    [InlineData(true, false, false, false, false)]
+    // Title Bar Hidden, Auto Size To Fit Content
+    [InlineData(false, true, true, true, true)]
+    public void Render_WhenInvoked_UsesCorrectWindowFlags(
+        bool titleBarVisible,
+        bool autoSizeToFitContent,
+        bool expectedNoTitleBar,
+        bool expectedAlwaysAutoResize,
+        bool expectedNoMove)
+    {
+        // Arrange
+        var windowFlags = ImGuiWindowFlags.None;
+
+        this.mockImGuiInvoker.When(x => x.Begin(Arg.Any<string>(), Arg.Any<ImGuiWindowFlags>()))
+            .Do((callInfo) =>
+            {
+                windowFlags = callInfo.Arg<ImGuiWindowFlags>();
+            });
+
+        var sut = CreateSystemUnderTest();
+        sut.TitleBarVisible = titleBarVisible;
+        sut.AutoSizeToFitContent = autoSizeToFitContent;
+
+        // Act
+        sut.Render();
+        var actualNoTitleBar = (windowFlags & ImGuiWindowFlags.NoTitleBar) != 0;
+        var actualAlwaysAutoResize = (windowFlags & ImGuiWindowFlags.AlwaysAutoResize) != 0;
+        var actualNoMove = (windowFlags & ImGuiWindowFlags.NoMove) != 0;
+
+        // Assert
+        actualNoTitleBar.Should().Be(expectedNoTitleBar);
+        actualAlwaysAutoResize.Should().Be(expectedAlwaysAutoResize);
+        actualNoMove.Should().Be(expectedNoMove);
+    }
+
+    [Theory]
+    [InlineData(true, true)]
+    [InlineData(false, false)]
+    public void Render_WhenSettingNoResize_SetsCorrectWindowFlags(bool noResize, bool expected)
+    {
+        // Arrange
+        var windowFlags = ImGuiWindowFlags.None;
+        var sut = CreateSystemUnderTest();
+        sut.NoResize = noResize;
+        this.mockImGuiInvoker.When(x => x.Begin(Arg.Any<string>(), Arg.Any<ImGuiWindowFlags>()))
+            .Do((callInfo) =>
+            {
+                windowFlags = callInfo.Arg<ImGuiWindowFlags>();
+            });
+
+        // Act
+        sut.Render();
+        var actual = (windowFlags & ImGuiWindowFlags.NoResize) != 0;
+
+        // Assert
+        actual.Should().Be(expected);
+    }
+
+    [Theory]
+    [InlineData(true, false, false)]
+    [InlineData(false, true, true)]
+    public void Render_WhenSettingVisibility_SetsCorrectWindowFlags(bool isVisible, bool expectedNoTitleBar, bool expectedNoBackground)
+    {
+        // Arrange
+        var windowFlags = ImGuiWindowFlags.None;
+        var sut = CreateSystemUnderTest();
+        sut.TitleBarVisible = true;
+        sut.Visible = isVisible;
+        this.mockImGuiInvoker.When(x => x.Begin(Arg.Any<string>(), Arg.Any<ImGuiWindowFlags>()))
+            .Do((callInfo) =>
+            {
+                windowFlags = callInfo.Arg<ImGuiWindowFlags>();
+            });
+
+        // Act
+        sut.Render();
+        var actualNoTitleBar = (windowFlags & ImGuiWindowFlags.NoTitleBar) != 0;
+        var actualNoBackground = (windowFlags & ImGuiWindowFlags.NoBackground) != 0;
+
+        // Assert
+        actualNoTitleBar.Should().Be(expectedNoTitleBar);
+        actualNoBackground.Should().Be(expectedNoBackground);
+    }
+
+    [Theory]
+    [InlineData(true, true, 1f, 5, 4)]
+    [InlineData(false, false, 0f, 0, 1)]
+    public void Render_WhenInvoked_SetsCorrectWindowStyles(
+        bool isVisible,
+        bool noResize,
+        float expectedAlpha,
+        int expectedInvokedCount,
+        int expectedPopClrCount)
+    {
+        // Arrange
+        var preRenderCount = 5;
+        var actualAlpha = float.MaxValue;
+        var actualTextClr = default(Color);
+
+        this.mockImGuiInvoker.When(x => x.PushStyleVar(ImGuiStyleVar.Alpha, Arg.Any<float>()))
+            .Do(callInfo =>
+            {
+                actualAlpha = callInfo.Arg<float>();
+            });
+
+        this.mockImGuiInvoker.When(x => x.PushStyleColor(ImGuiCol.Text, Arg.Any<Color>()))
+            .Do(callInfo =>
+            {
+                actualTextClr = callInfo.Arg<Color>();
+            });
+
+        var sut = CreateSystemUnderTest();
+        sut.Visible = isVisible;
+        sut.NoResize = noResize;
+
+        // Act
+        sut.Render();
+
+        // Assert
+        actualAlpha.Should().Be(expectedAlpha);
+        actualTextClr.Should().Be(Color.White);
+
+        this.mockImGuiInvoker.Received(expectedInvokedCount).PushStyleColor(ImGuiCol.ResizeGrip, Color.Transparent);
+        this.mockImGuiInvoker.Received(expectedInvokedCount).PushStyleColor(ImGuiCol.ResizeGripHovered, Color.Transparent);
+        this.mockImGuiInvoker.Received(expectedInvokedCount).PushStyleColor(ImGuiCol.ResizeGripActive, Color.Transparent);
+
+        this.mockImGuiInvoker.Received(preRenderCount).PopStyleColor(expectedPopClrCount);
+        this.mockImGuiInvoker.Received(preRenderCount).PopStyleVar(1);
+    }
+
+    [Fact]
+    public void Render_WhenAutoSizingToContentWithVisibleTitleBar_AutoSizesToTitle()
+    {
+        // Arrange
+        var preRenderCount = 5;
+        var actualBtnSize = Vector2.Zero;
+
+        var sut = CreateSystemUnderTest();
+        sut.AutoSizeToFitContent = true;
+        sut.TitleBarVisible = true;
+        sut.Title = "Test Title";
+
+        this.mockImGuiInvoker.CalcTextSize(Arg.Any<string>()).Returns(new Vector2(100, 0));
+        this.mockImGuiInvoker.When(x => x.InvisibleButton(Arg.Any<string>(), Arg.Any<Vector2>()))
+            .Do(callInfo => actualBtnSize = callInfo.Arg<Vector2>());
+
+        // Act
+        sut.Render();
+
+        // Assert
+        this.mockImGuiInvoker.Received(preRenderCount).CalcTextSize("Test Title");
+        this.mockImGuiInvoker.Received(preRenderCount).InvisibleButton("##title_width Test Title", new Vector2(128, 0));
+
+        // NOTE: The width of the title is always the width of the text plus 28 pixels to take
+        // into account the ImGui window collapse button to the left of the title.
+        actualBtnSize.Should().Be(new Vector2(128, 0));
+    }
+
+    [Theory]
+    [InlineData(true, 10, 0, 0f, 0f)]
+    [InlineData(true, 0, 20, 0f, 0f)]
+    [InlineData(false, 10, 0, 10f, 0f)]
+    [InlineData(false, 0, 20, 0f, 20f)]
+    public void Render_WhenResizingControlGroup_UpdatesPosition(
+        bool autoSieToFitContent,
+        int width,
+        int height,
+        float expectedWidth,
+        float expectedHeight)
+    {
+        // Arrange
+        var sut = CreateSystemUnderTest();
+        sut.AutoSizeToFitContent = autoSieToFitContent;
+
+        /* Set the 'shouldSetSize' field to default value of false instead of true to properly
+         * test out invoke counts.
+        */
+        sut.SetFieldValue("shouldSetSize", false);
+
+        if (width != 0)
+        {
+            sut.Width = width;
+        }
+
+        if (height != 0)
+        {
+            sut.Height = height;
+        }
+
+        sut.Render();
+
+        // Act
+        sut.Render();
+
+        // Assert
+        this.mockImGuiInvoker.Received(1).SetWindowSize(new Vector2(expectedWidth, expectedHeight));
+    }
+
+    [Fact]
+    public void Render_WhenSizeHasChanged_InvokesSizeChangedEvent()
+    {
+        // Arrange
+        var sut = CreateSystemUnderTest();
+        this.mockImGuiInvoker.GetWindowSize().Returns(new Vector2(100, 0));
+        var sizeChangedInvoked = false;
+
+        sut.SizeChanged += (_, size) =>
+        {
+            sizeChangedInvoked = true;
+            size.Should().Be(new Size(100, 0));
+        };
+
+        // Act
+        sut.Render();
+
+        // Assert
+        sizeChangedInvoked.Should().BeTrue();
+    }
+
+    [Fact]
+    public void Render_WhenDraggingControlGroup_UpdatesPosition()
+    {
+        // Arrange
+        // Guarantee that the window is not being dragged
+        this.mockImGuiInvoker.IsWindowFocused().Returns(false);
+        this.mockImGuiInvoker.IsMouseDragging(Arg.Any<ImGuiMouseButton>()).Returns(false);
+
+        var sut = CreateSystemUnderTest();
+        sut.Position = new Point(10, 20);
+        sut.Render();
+
+        // Act
+        sut.Render();
+
+        // Assert
+        this.mockImGuiInvoker.Received(1).SetWindowPos(new Vector2(10, 20));
+    }
+
+    [Fact]
+    public void Render_WhenInvoked_InvokesInitializedEventAfterPreRender()
+    {
+        // Arrange
+        var initInvoked = false;
+        var sut = CreateSystemUnderTest();
+        sut.Initialized += (_, _) => initInvoked = true;
+        sut.Render();
+
+        // Act
+        sut.Render();
+
+        // Assert
+        initInvoked.Should().BeTrue();
+    }
+
+    [Fact]
+    public void Render_WithDefaultSettings_RendersGroup()
+    {
+        // Arrange
+        var preRenderCount = 5;
+
+        this.mockImGuiInvoker.IsWindowFocused().Returns(true);
+
+        var sut = CreateSystemUnderTest();
+        sut.Title = "Test Title";
+
+        // Act
+        sut.Render();
+
+        // Assert
+        this.mockImGuiInvoker.Received(preRenderCount).PushID(Arg.Any<string>());
+        this.mockImGuiInvoker.Received(preRenderCount).Begin("Test Title", Arg.Any<ImGuiWindowFlags>());
+        this.mockImGuiInvoker.Received(preRenderCount).PopID();
+        this.mockImGuiInvoker.Received(preRenderCount).IsWindowFocused();
+        this.mockImGuiInvoker.Received(preRenderCount).IsMouseDragging(ImGuiMouseButton.Left);
+        this.mockImGuiInvoker.Received(preRenderCount).End();
     }
     #endregion
 
