@@ -4,10 +4,12 @@
 
 namespace KdGui;
 
+using System.Diagnostics.CodeAnalysis;
 using Core;
 using Carbonate.NonDirectional;
 
 /// <inheritdoc cref="ILabel"/>
+[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global", Justification = "Instantiated via IoC container.")]
 internal sealed class Label : Control, ILabel
 {
     /// <summary>

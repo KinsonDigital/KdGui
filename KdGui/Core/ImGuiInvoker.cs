@@ -2,11 +2,14 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-namespace Core;
+#pragma warning disable SA1515
+namespace KdGui.Core;
 
+using System.Drawing;
 using System.Numerics;
 using ImGuiNET;
 
+/// <inheritdoc/>
 internal sealed class ImGuiInvoker : IImGuiInvoker
 {
      /// <inheritdoc/>
@@ -35,6 +38,11 @@ internal sealed class ImGuiInvoker : IImGuiInvoker
 
     /// <inheritdoc/>
     public bool Checkbox(string label, ref bool v) => ImGui.Checkbox(label, ref v);
+
+    /// <inheritdoc/>
+    // ReSharper disable InconsistentNaming
+    public bool InvisibleButton(string str_id, Vector2 size) => ImGui.InvisibleButton(str_id, size);
+    // ReSharper restore InconsistentNaming
 
     /// <inheritdoc/>
     // ReSharper disable once InconsistentNaming
@@ -80,6 +88,18 @@ internal sealed class ImGuiInvoker : IImGuiInvoker
     public void PushStyleColor(ImGuiCol idx, Vector4 col) => ImGui.PushStyleColor(idx, col);
 
     /// <inheritdoc/>
+    public void PushStyleColor(ImGuiCol idx, uint col) => ImGui.PushStyleColor(idx, col);
+
+    /// <inheritdoc/>
+    public void PushStyleColor(ImGuiCol idx, Color clr)
+    {
+        var clrVector = new Vector4(clr.R, clr.G, clr.B, clr.A);
+
+        var clrValue = ImGui.ColorConvertFloat4ToU32(clrVector);
+        PushStyleColor(idx, clrValue);
+    }
+
+    /// <inheritdoc/>
     public void PopStyleColor(int count) => ImGui.PopStyleColor(count);
 
     /// <inheritdoc/>
@@ -92,7 +112,7 @@ internal sealed class ImGuiInvoker : IImGuiInvoker
     public void PopStyleVar(int count) => ImGui.PopStyleVar(count);
 
     /// <inheritdoc/>
-    public Vector2 CalcTextSize(string text) => ImGui.CalcTextSize(text);
+    public Vector2 CalcTextSize(string text) => string.IsNullOrEmpty(text) ? Vector2.Zero : ImGui.CalcTextSize(text);
 
     /// <inheritdoc/>
     public bool IsItemHovered() => ImGui.IsItemHovered();

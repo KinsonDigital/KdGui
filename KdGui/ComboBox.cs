@@ -14,6 +14,7 @@ using Carbonate.NonDirectional;
 using ImGuiNET;
 
 /// <inheritdoc cref="IComboBox"/>
+[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global", Justification = "Instantiated via IoC container.")]
 internal sealed class ComboBox : Control, IComboBox
 {
     private readonly string textId = Guid.NewGuid().ToString();

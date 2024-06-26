@@ -24,7 +24,7 @@ internal static class ExtensionMethods
     /// <param name="suppressDisposal"><c>true</c> to ignore dispose warnings if the original code invokes dispose.</param>
     /// <remarks>
     ///     This method uses the container's LifestyleSelectionBehavior to select the exact
-    ///     lifestyle for the specified type. By default this will be Transient.
+    ///     lifestyle for the specified type. By default, this will be Transient.
     /// </remarks>
     /// <exception cref="ArgumentNullException">Thrown when one of the arguments is a null reference.</exception>
     /// <exception cref="InvalidOperationException">Thrown when this container instance is locked and cannot be altered.</exception>
