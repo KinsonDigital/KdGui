@@ -12,6 +12,7 @@ using Carbonate.NonDirectional;
 using ImGuiNET;
 
 /// <inheritdoc cref="ISlider"/>
+[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global", Justification = "Instantiated via IoC container.")]
 internal sealed class Slider : Control, ISlider
 {
     private readonly string id = Guid.NewGuid().ToString();

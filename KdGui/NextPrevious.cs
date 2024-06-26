@@ -6,10 +6,12 @@ namespace KdGui;
 
 using Core;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Carbonate.NonDirectional;
 using ImGuiNET;
 
 /// <inheritdoc cref="INextPrevious"/>
+[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global", Justification = "Instantiated via IoC container.")]
 internal sealed class NextPrevious : Control, INextPrevious
 {
     /// <summary>

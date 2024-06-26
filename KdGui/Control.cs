@@ -47,7 +47,7 @@ internal abstract class Control : IControl
             // the already subscribed id before resubscribing
             if (this.windowOwnerId != Guid.Empty)
             {
-                this.unsubscriber.Dispose();
+                this.unsubscriber?.Dispose();
             }
 
             this.windowOwnerId = value;

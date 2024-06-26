@@ -6,11 +6,13 @@ namespace KdGui;
 
 using Core;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using Carbonate.NonDirectional;
 using ImGuiNET;
 
 /// <inheritdoc cref="IButton"/>
+[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global", Justification = "Instantiated via IoC container.")]
 internal sealed class Button : Control, IButton
 {
     private readonly string id = Guid.NewGuid().ToString();

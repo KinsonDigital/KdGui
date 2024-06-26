@@ -2,8 +2,10 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-namespace Core;
+#pragma warning disable SA1515
+namespace KdGui.Core;
 
+using System.Drawing;
 using System.Numerics;
 using ImGuiNET;
 
@@ -46,7 +48,7 @@ public interface IImGuiInvoker
     ///             Numerical Formatting
     ///             <para/>
     ///             You can control how numeric values are displayed, including the number of decimal places,
-    ///             whether to use scientific notation, whether to include a thousands separator, and more.
+    ///             whether to use scientific notation, whether to include the thousands separator, and more.
     ///             For example, {0:F2} formats the number with two decimal places.
     ///             <para/>
     ///         </item>
@@ -112,6 +114,14 @@ public interface IImGuiInvoker
     /// <param name="v">The state of the checkbox.</param>
     /// <returns>True if the checkbox state was changed.</returns>
     bool Checkbox(string label, ref bool v);
+
+    /// <summary>
+    /// Creates an invisible button.
+    /// </summary>
+    /// <param name="str_id">The id of the button.</param>
+    /// <param name="size">The size of the button.</param>
+    /// <returns>True if the button has been clicked.</returns>
+    bool InvisibleButton(string str_id, Vector2 size);
 
     /// <summary>
     /// Creates a combo box control.
@@ -199,6 +209,20 @@ public interface IImGuiInvoker
     /// <param name="idx">The type of area of the style to push the color.</param>
     /// <param name="col">The color to push.</param>
     void PushStyleColor(ImGuiCol idx, Vector4 col);
+
+    /// <summary>
+    /// Pushes the color using the given <paramref name="col"/> to the current style described by the given <paramref name="idx"/>.
+    /// </summary>
+    /// <param name="idx">The type of area of the style to push the color.</param>
+    /// <param name="col">The color to push.</param>
+    void PushStyleColor(ImGuiCol idx, uint col);
+
+    /// <summary>
+    /// Pushes the color using the given <paramref name="clr"/> to the current style described by the given <paramref name="idx"/>.
+    /// </summary>
+    /// <param name="idx">The type of area of the style to push the color.</param>
+    /// <param name="clr">The color to push.</param>
+    void PushStyleColor(ImGuiCol idx, Color clr);
 
     /// <summary>
     /// Pops the most recent style color.

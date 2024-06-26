@@ -2,7 +2,7 @@
 // Copyright (c) KinsonDigital. All rights reserved.
 // </copyright>
 
-namespace Core;
+namespace KdGui.Core;
 
 using System.Drawing;
 using System.Numerics;

@@ -6,6 +6,7 @@ namespace KdGui;
 
 using Core;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Carbonate.NonDirectional;
 using ImGuiNET;
@@ -13,6 +14,7 @@ using ImGuiNET;
 /// <summary>
 /// <inheritdoc cref="IUpDown"/>
 /// </summary>
+[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global", Justification = "Instantiated via IoC container.")]
 internal sealed class UpDown : Control, IUpDown
 {
     private readonly string upId = Guid.NewGuid().ToString();
@@ -29,6 +31,7 @@ internal sealed class UpDown : Control, IUpDown
     {
     }
 
+    /// <inheritdoc/>
     public event EventHandler<float>? ValueChanged;
 
     /// <inheritdoc/>

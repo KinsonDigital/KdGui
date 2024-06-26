@@ -6,10 +6,12 @@ namespace KdGui;
 
 using Core;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Carbonate.NonDirectional;
 using ImGuiNET;
 
 /// <inheritdoc cref="IArrowButton"/>
+[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global", Justification = "Instantiated via IoC container.")]
 internal sealed class ArrowButton : Control, IArrowButton
 {
     private readonly string id = $"##arrow-btn-{Guid.NewGuid().ToString()}";
