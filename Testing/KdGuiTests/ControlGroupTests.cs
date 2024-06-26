@@ -7,14 +7,12 @@ namespace KdGuiTests;
 using System.Drawing;
 using System.Numerics;
 using Carbonate.NonDirectional;
-using Castle.Components.DictionaryAdapter;
 using FluentAssertions;
 using Helpers;
 using ImGuiNET;
 using KdGui;
 using KdGui.Core;
 using NSubstitute;
-using NSubstitute.ReceivedExtensions;
 
 /// <summary>
 /// Tests the <see cref="ControlGroup"/> class.

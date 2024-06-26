@@ -4,7 +4,6 @@
 
 namespace KdGuiTests.Helpers;
 
-using System.Collections;
 using System.Reflection;
 using FluentAssertions;
 
