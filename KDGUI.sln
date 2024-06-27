@@ -16,7 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{
 		.github\workflows\add-new-item-to-project.yml = .github\workflows\add-new-item-to-project.yml
 		.github\workflows\build-misc-projects-status-check.yml = .github\workflows\build-misc-projects-status-check.yml
 		.github\workflows\build-status-check.yml = .github\workflows\build-status-check.yml
-		.github\workflows\prepare-release.yml = .github\workflows\prepare-release.yml
 		.github\workflows\release.yml = .github\workflows\release.yml
 		.github\workflows\sdk-status-check.yml = .github\workflows\sdk-status-check.yml
 		.github\workflows\sonar-scan-pr-status-check.yml = .github\workflows\sonar-scan-pr-status-check.yml
